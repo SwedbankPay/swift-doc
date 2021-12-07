@@ -50,7 +50,7 @@ struct SidebarPage: Page {
 
     // MARK: - Page
 
-    var document: CommonMark.Document {
+    func document(style: CommonMarkStyle) -> CommonMark.Document {
         return Document {
             ForEach(in: (
                 [
@@ -82,7 +82,7 @@ struct SidebarPage: Page {
 
     var html: HypertextLiteral.HTML {
         #"""
-        \#(document)
+        \#(document(style: .default))
         """#
     }
 }

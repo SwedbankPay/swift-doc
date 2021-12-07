@@ -7,7 +7,7 @@ import HypertextLiteral
 import SwiftSyntaxHighlighter
 import Xcode
 
-struct Documentation: Component {
+struct Documentation: HypertextLiteralConvertible {
     var symbol: Symbol
     var module: Module
     let baseURL: String
@@ -22,11 +22,14 @@ struct Documentation: Component {
 
     // MARK: - Component
 
-    var fragment: Fragment {
+    func fragment(style: CommonMarkStyle) -> Fragment {
         guard let documentation = symbol.documentation else { return Fragment { "" } }
 
         return Fragment {
-            if !symbol.conditions.isEmpty {
+            // Jekyll does not render markdown inside the <dd> tag correctly
+            let useDescriptionList = style != .jekyll && !symbol.conditions.isEmpty
+            
+            if useDescriptionList {
                 Fragment {
                     #"""
                     <dl>
@@ -70,7 +73,7 @@ struct Documentation: Component {
                 }
             }
 
-            if !symbol.conditions.isEmpty {
+            if useDescriptionList {
                 Fragment {
                     #"""
 

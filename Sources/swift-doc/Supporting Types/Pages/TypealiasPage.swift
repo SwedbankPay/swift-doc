@@ -23,10 +23,10 @@ struct TypealiasPage: Page {
         return symbol.id.description
     }
 
-    var document: CommonMark.Document {
+    func document(style: CommonMarkStyle) -> CommonMark.Document {
         Document {
             Heading { symbol.id.description }
-            Documentation(for: symbol, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter)
+            Documentation(for: symbol, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter).fragment(style: style)
         }
     }
 

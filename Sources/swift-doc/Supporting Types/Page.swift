@@ -6,11 +6,16 @@ import struct SwiftSemantics.Protocol
 import CommonMark
 import HypertextLiteral
 
+enum CommonMarkStyle {
+    case `default`
+    case jekyll
+}
+
 protocol Page: HypertextLiteralConvertible {
     var module: Module { get }
     var baseURL: String { get }
     var title: String { get }
-    var document: CommonMark.Document { get }
+    func document(style: CommonMarkStyle) -> CommonMark.Document
     var html: HypertextLiteral.HTML { get }
 }
 
@@ -24,9 +29,11 @@ extension Page {
         let data: Data?
         switch format {
         case .commonmark:
-            data = document.render(format: .commonmark).data(using: .utf8)
+            data = document(style: .default).render(format: .commonmark).data(using: .utf8)
         case .html:
             data = layout(self).description.data(using: .utf8)
+        case .jekyll:
+            data = (jekyllFrontMatter(self) + document(style: .jekyll).render(format: .commonmark)).data(using: .utf8)
         }
 
         guard let filedata = data else { return }

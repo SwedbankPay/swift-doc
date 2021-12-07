@@ -24,11 +24,11 @@ struct GlobalPage: Page {
         return name
     }
     
-    var document: CommonMark.Document {
+    func document(style: CommonMarkStyle) -> CommonMark.Document {
         return Document {
             ForEach(in: symbols) { symbol in
                 Heading { symbol.id.description }
-                Documentation(for: symbol, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter)
+                Documentation(for: symbol, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter).fragment(style: style)
             }
         }
     }

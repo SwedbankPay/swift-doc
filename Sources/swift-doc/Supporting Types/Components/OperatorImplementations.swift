@@ -4,7 +4,7 @@ import SwiftMarkup
 import SwiftSemantics
 import HypertextLiteral
 
-struct OperatorImplementations: Component {
+struct OperatorImplementations: HypertextLiteralConvertible {
     var symbol: Symbol
     var module: Module
     let baseURL: String
@@ -24,7 +24,7 @@ struct OperatorImplementations: Component {
 
     // MARK: - Component
 
-    var fragment: Fragment {
+    func fragment(style: CommonMarkStyle) -> Fragment {
         guard !implementations.isEmpty else { return Fragment { "" } }
 
         return Fragment {
@@ -32,7 +32,7 @@ struct OperatorImplementations: Component {
                 Section {
                     Heading { implementation.name }
 
-                    Documentation(for: implementation, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter)
+                    Documentation(for: implementation, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter).fragment(style: style)
                 }
             }
         }

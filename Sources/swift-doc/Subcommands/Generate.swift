@@ -14,6 +14,7 @@ extension SwiftDoc {
     enum Format: String, ExpressibleByArgument {
       case commonmark
       case html
+      case jekyll
     }
 
     struct Options: ParsableArguments {
@@ -119,6 +120,8 @@ extension SwiftDoc {
             filename = "Home.md"
           case .html:
             filename = "index.html"
+          case .jekyll:
+            filename = "index.md"
           }
 
           let url = outputDirectoryURL.appendingPathComponent(filename)
@@ -131,6 +134,8 @@ extension SwiftDoc {
             pages["_Footer"] = FooterPage(baseURL: baseURL)
           case .html:
             pages["Home"] = HomePage(module: module, externalTypes: Array(symbolsByExternalType.keys), baseURL: baseURL, symbolFilter: symbolFilter)
+          case .jekyll:
+            pages["Home"] = HomePage(module: module, externalTypes: Array(symbolsByExternalType.keys), baseURL: baseURL, symbolFilter: symbolFilter)
           }
 
           try pages.map { $0 }.parallelForEach {
@@ -142,6 +147,10 @@ extension SwiftDoc {
               filename = "index.html"
             case .html:
               filename = "\(path(for: $0.key))/index.html"
+            case .jekyll where $0.key == "Home":
+              filename = "index.md"
+            case .jekyll:
+              filename = "\(path(for: $0.key)).md"
             }
 
             let url = outputDirectoryURL.appendingPathComponent(filename)
