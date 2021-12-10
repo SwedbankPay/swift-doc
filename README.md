@@ -1,8 +1,10 @@
 # swift-doc
 
-![CI][ci badge]
-
 A package for generating documentation for Swift projects.
+
+The primary purpose of this fork is to support the
+[developer.swedbankpay.com][swedbankpay-devportal] project.
+It has some additions to the original `swift-doc` for this purpose.
 
 Given a directory of Swift files,
 `swift-doc` generates HTML or CommonMark (Markdown) files
@@ -16,7 +18,7 @@ as well as top-level type aliases, functions, and variables.
 
 ## Requirements
 
-- Swift 5.3+
+- Swift 5.5+
 - [libxml2][libxml2]
 - [GraphViz][graphviz] _(optional)_
 
@@ -26,47 +28,14 @@ as well as top-level type aliases, functions, and variables.
 
 ### Installation
 
-#### Homebrew
-
-Run the following command to install using [Homebrew](https://brew.sh/):
-
-```console
-$ brew install swiftdocorg/formulae/swift-doc
-```
-
-If you already have `swift-doc` installed,
-run the following command to upgrade your installation:
-
-```console
-$ brew upgrade swift-doc
-```
-
-If installing or upgrading fails with the message
-*Error: Failed to download resource "swift-doc"*,
-try resetting your installation with the following commands:
-
-```console
-$ brew uninstall swift-doc
-$ brew untap swiftdocorg/formulae
-$ brew install swiftdocorg/formulae/swift-doc
-```
-
-#### Docker
-
-You can run `swift-doc` from the latest [Docker][docker] image
-with the following commands:
-
-```terminal
-$ docker pull swiftdoc/swift-doc:latest
-$ docker run -it swiftdoc/swift-doc
-```
+Currently, this fork only supports manual installation.
 
 #### Manually
 
 Run the following commands to build and install manually:
 
 ```terminal
-$ git clone https://github.com/SwiftDocOrg/swift-doc
+$ git clone https://github.com/SwedbankPay/swift-doc
 $ cd swift-doc
 $ make install
 ```
@@ -272,7 +241,7 @@ or bundle them into a release artifact.
   A path to a directory containing Swift (`.swift`) files in your workspace.
   (Default: `"./Sources"`)
 - `format`:
-  The output format (`"commonmark"` or `"html"`)
+  The output format (`"commonmark"`, `"html"`, or `"jekyll"`)
   (Default: `"commonmark"`)
 - `module-name`:
   The name of the module.
@@ -298,7 +267,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Generate Documentation
-        uses: SwiftDocOrg/swift-doc@master
+        uses: SwedbankPay/swift-doc@master
         with:
           inputs: "Sources"
           module-name: MyLibrary
@@ -357,24 +326,10 @@ $ git commit
 
 ## Release Process
 
-> The following information is primarily for the benefit of project maintainers.
-> That said, if you have any suggestions for how to improve this process,
-> please let us know by [opening an issue][open an issue].
-
-Follow these steps to release a new version of `swift-doc`:
-
-- [x] Verify that the latest commit
-      [passed all CI checks](https://github.com/SwiftDocOrg/swift-doc/actions?query=workflow%3ACI).
-- [x] Update the Changelog by creating a new heading for the release
-      and modifying the last path component for the `unreleased` link reference.
-- [x] Update the [`version` constant](https://github.com/SwiftDocOrg/swift-doc/blob/master/Sources/swift-doc/main.swift#L25)
-      in the command-line executable.
-- [x] Create a new commit with the message "Bump version to `$VERSION`",
-      where `$VERSION` is a [SemVer]-compatible version number.
-- [x] Tag that commit with the tag name "`$VERSION`"
-- [x] Run the command `git push origin master --tags`
-- [x] Create a new [release](https://github.com/SwiftDocOrg/swift-doc/releases)
-      that corresponds to the new tag.
+> The process for this fork is not yet well-defined.
+> For maintainers tackling this: refer to the process of the
+> [original project][original-swiftdoc]. You will likely want to restore
+> some of the GitHub Actions workflows for this purpose.
 
 ## Known Issues
 
@@ -397,9 +352,10 @@ MIT
 
 ## Contact
 
-Mattt ([@mattt](https://twitter.com/mattt))
+Author of original `swift-doc`: Mattt ([@mattt](https://twitter.com/mattt))
 
-[ci badge]: https://github.com/SwiftDocOrg/swift-doc/workflows/CI/badge.svg
+[original-swiftdoc]: https://github.com/SwiftDocOrg/swift-doc
+[swedbankpay-devportal]: https://github.com/SwedbankPay/developer.swedbankpay.com/
 [alamofire wiki]: https://github.com/SwiftDocOrg/Alamofire/wiki
 [swiftsemantics html]: https://swift-doc-preview.netlify.app
 [github wiki]: https://help.github.com/en/github/building-a-strong-community/about-wikis
@@ -409,7 +365,7 @@ Mattt ([@mattt](https://twitter.com/mattt))
 [swiftmarkup]: https://github.com/SwiftDocOrg/SwiftMarkup
 [commonmark]: https://github.com/SwiftDocOrg/CommonMark
 [github-wiki-publish-action]: https://github.com/SwiftDocOrg/github-wiki-publish-action
-[open an issue]: https://github.com/SwiftDocOrg/swift-doc/issues/new
+[open an issue]: https://github.com/SwedbankPay/swift-doc/issues/new
 [jazzy]: https://github.com/realm/jazzy
 [swift number protocols diagram]: https://nshipster.com/propertywrapper/#swift-number-protocols
 [protocol-oriented programming]: https://asciiwwdc.com/2015/sessions/408
