@@ -28,7 +28,7 @@ struct FooterPage: Page {
 
     // MARK: - Page
 
-    var document: CommonMark.Document {
+    func document(style: CommonMarkStyle) -> CommonMark.Document {
         let timestamp = timestampDateFormatter.string(from: Date())
 
         return Document {

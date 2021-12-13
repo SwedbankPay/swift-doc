@@ -3,11 +3,11 @@
     "pins": [
       {
         "package": "CommonMark",
-        "repositoryURL": "https://github.com/SwiftDocOrg/CommonMark.git",
+        "repositoryURL": "https://github.com/qvik/CommonMark.git",
         "state": {
-          "branch": null,
-          "revision": "1c8f3983c12b848e0d84b3a7a1d6f9a735e6661a",
-          "version": "0.5.0"
+          "branch": "fix/linux-swift-5.5",
+          "revision": "6f8dc577dd07d263e819d30b10444ef6503d7640",
+          "version": null
         }
       },
       {
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/SwiftDocOrg/GraphViz.git",
         "state": {
           "branch": null,
-          "revision": "e9a73a30755c3c5b26ba7c73312b1f2ccb9a1a30",
-          "version": "0.4.0"
+          "revision": "74b6cbd8c5ecea9f64d84c4e1c88d65604dd033f",
+          "version": "0.4.1"
         }
       },
       {
@@ -33,8 +33,8 @@
         "repositoryURL": "https://github.com/SwiftDocOrg/Markup.git",
         "state": {
           "branch": null,
-          "revision": "029ad8c1115ab32b7c20ab52eb092fbc030deb17",
-          "version": "0.0.4"
+          "revision": "c36d9ca11240bae6e3f7f17d29b5cfe3356f97ca",
+          "version": "0.1.3"
         }
       },
       {
@@ -77,8 +77,8 @@
         "package": "SwiftSyntax",
         "repositoryURL": "https://github.com/apple/swift-syntax.git",
         "state": {
-          "branch": "release/5.4",
-          "revision": "d81b6a6dc2698a93dcc04304fb15a5446b5278a4",
+          "branch": "release/5.5",
+          "revision": "2ca29758ed04c0a209221db59f922d4faf539f03",
           "version": null
         }
       },
@@ -95,8 +95,8 @@
         "package": "SwiftSemantics",
         "repositoryURL": "https://github.com/SwiftDocOrg/SwiftSemantics.git",
         "state": {
-          "branch": "0.3.0",
-          "revision": "2f571ccc67e0789d23f8adbccb6a18a6ff3b166c",
+          "branch": "0.3.2",
+          "revision": "7690606eec5db6b089d6a5d252013ee07cade323",
           "version": null
         }
       },
@@ -104,8 +104,8 @@
         "package": "SwiftSyntaxHighlighter",
         "repositoryURL": "https://github.com/NSHipster/SwiftSyntaxHighlighter.git",
         "state": {
-          "branch": "1.2.2",
-          "revision": "175923d005df00dc76c3c191bd7977c066a5288c",
+          "branch": "1.2.4",
+          "revision": "ac89909534b2afa4e9626307191c0d277ff82fe8",
           "version": null
         }
       }

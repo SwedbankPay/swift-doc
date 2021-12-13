@@ -4,7 +4,7 @@ import SwiftMarkup
 import SwiftSemantics
 import HypertextLiteral
 
-struct Members: Component {
+struct Members: HypertextLiteralConvertible {
     var symbol: Symbol
     var module: Module
     let baseURL: String
@@ -57,7 +57,7 @@ struct Members: Component {
 
     // MARK: - Component
 
-    var fragment: Fragment {
+    func fragment(style: CommonMarkStyle) -> Fragment {
         guard !members.isEmpty || !defaultImplementations.isEmpty else { return Fragment { "" } }
 
         return Fragment {
@@ -70,7 +70,7 @@ struct Members: Component {
                             Heading {
                                 Code { member.name }
                             }
-                            Documentation(for: member, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter)
+                            Documentation(for: member, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter).fragment(style: style)
                         }
                     }
                 }
@@ -87,7 +87,7 @@ struct Members: Component {
                             Section {
                                 ForEach(in: members) { member in
                                     Heading { member.name }
-                                    Documentation(for: member, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter)
+                                    Documentation(for: member, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter).fragment(style: style)
                                 }
                             }
                         }

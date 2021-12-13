@@ -23,14 +23,14 @@ struct TypePage: Page {
         return symbol.id.description
     }
 
-    var document: CommonMark.Document {
+    func document(style: CommonMarkStyle) -> CommonMark.Document {
         return CommonMark.Document {
             Heading { symbol.id.description }
 
-            Documentation(for: symbol, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter)
+            Documentation(for: symbol, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter).fragment(style: style)
             Relationships(of: symbol, in: module, baseURL: baseURL, includingChildren: symbolFilter)
-            Members(of: symbol, in: module, baseURL: baseURL, symbolFilter: symbolFilter)
-            Requirements(of: symbol, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter)
+            Members(of: symbol, in: module, baseURL: baseURL, symbolFilter: symbolFilter).fragment(style: style)
+            Requirements(of: symbol, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter).fragment(style: style)
         }
     }
 

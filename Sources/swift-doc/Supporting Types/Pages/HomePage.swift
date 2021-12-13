@@ -66,7 +66,7 @@ struct HomePage: Page {
         return module.name
     }
 
-    var document: CommonMark.Document {
+    func document(style: CommonMarkStyle) -> CommonMark.Document {
         return Document {
             ForEach(in: [
                 ("Types", classes + enumerations + structures),

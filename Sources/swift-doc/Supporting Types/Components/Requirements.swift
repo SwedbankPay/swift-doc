@@ -4,7 +4,7 @@ import SwiftMarkup
 import SwiftSemantics
 import HypertextLiteral
 
-struct Requirements: Component {
+struct Requirements: HypertextLiteralConvertible {
     var symbol: Symbol
     var module: Module
     let baseURL: String
@@ -26,7 +26,7 @@ struct Requirements: Component {
 
     // MARK: - Component
 
-    var fragment: Fragment {
+    func fragment(style: CommonMarkStyle) -> Fragment {
         guard !sections.isEmpty else { return Fragment { "" } }
 
         return Fragment {
@@ -36,7 +36,7 @@ struct Requirements: Component {
                     Section {
                         ForEach(in: section.requirements) { requirement in
                             Heading { requirement.name.escapingEmojiShortcodes }
-                            Documentation(for: requirement, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter)
+                            Documentation(for: requirement, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter).fragment(style: style)
                         }
                     }
                 }

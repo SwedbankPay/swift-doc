@@ -40,7 +40,7 @@ struct ExternalTypePage: Page {
         ].filter { !$0.members.isEmpty }
     }
 
-    var document: CommonMark.Document {
+    func document(style: CommonMarkStyle) -> CommonMark.Document {
         Document {
             Heading { "Extensions on \(externalType)" }
             ForEach(in: sections) { section -> BlockConvertible in
@@ -52,7 +52,7 @@ struct ExternalTypePage: Page {
                             Heading {
                                 Code { member.name }
                             }
-                            Documentation(for: member, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter)
+                            Documentation(for: member, in: module, baseURL: baseURL, includingOtherSymbols: symbolFilter).fragment(style: style)
                         }
                     }
                 }
